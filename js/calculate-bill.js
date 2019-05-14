@@ -17,9 +17,9 @@ var billStringElement = document.querySelector(".billString");
 
 function calculateBtnClicked(callsAndSms){
    var callsAndSmsArr = callsAndSms.split(",");
-    
    var callsCounter = 0;
    var smsCounter = 0;
+
    for(var i = 0; i < callsAndSmsArr.length; i++) {
       var element = callsAndSmsArr[i].trim();
       element = element.toLowerCase();
@@ -35,7 +35,6 @@ function calculateBtnClicked(callsAndSms){
       }
    }
    return (callsCounter * 2.75 + smsCounter * 0.75).toFixed(2);
-
 }
 
 //link the function to a click event on the calculate button
@@ -44,11 +43,13 @@ calculateBtnElement.addEventListener('click', function() {
    var totalBill = calculateBtnClicked(string);
    billTotalElement.innerHTML = totalBill;
 
-   if(totalBill > 30) {
+   if(totalBill >= 30) {
       totalElement.classList.remove('warning');
       totalElement.classList.add('danger');
-   } else if(totalBill > 20 && totalBill < 30){
+   } else if(totalBill >= 20 && totalBill < 30){
       totalElement.classList.remove('danger');
       totalElement.classList.add('warning');
+   } else {
+      totalElement.classList.remove('warning');
    }
 });
