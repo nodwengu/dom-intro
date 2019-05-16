@@ -10,8 +10,6 @@ var smsTotalElem = document.querySelector('.smsTotalOne');
 var totalCostElem = document.querySelector('.totalOne');
 var totalTextElem = document.querySelector('.red');
 
-// totalTextElem.innerHTML = "Test text";
-
 //add an event listener for when the add button is pressed
 
 //in the event listener check if the value in the bill type textbox is 'sms' or 'call'
@@ -46,13 +44,10 @@ function textBillTotal(){
   
    //color the total based on the criteria
    if (totalCost >= 50){
-      // adding the danger class will make the text red
       totalTextElem.classList.add("danger");
-   }
-   else if (totalCost >= 30){
+   } else if (totalCost >= 30){
       totalTextElem.classList.add("warning");
    }
-
 }
 
 addToBillBtnElem.addEventListener('click', textBillTotal);

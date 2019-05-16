@@ -19,8 +19,8 @@ var totalText = document.querySelector('.orange');
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
 
-var callsTotal = 0;
-var smsTotal = 0;
+var callsRadioTotal = 0;
+var smsRadioTotal = 0;
 
 function radioBillTotal(){
     
@@ -29,15 +29,15 @@ function radioBillTotal(){
 
       if(element.checked) {
          if(element.value == 'call') {
-            callsTotal += 2.75;
+            callsRadioTotal += 2.75;
          } else if(element.value == 'sms') {
-            smsTotal += 0.75;
+            smsRadioTotal += 0.75;
          }
       }
-      callTotalTwoElem.innerHTML = callsTotal.toFixed(2);
-      smsTotalTwoElem.innerHTML = smsTotal.toFixed(2);
+      callTotalTwoElem.innerHTML = callsRadioTotal.toFixed(2);
+      smsTotalTwoElem.innerHTML = smsRadioTotal.toFixed(2);
 
-      var totalCost = callsTotal + smsTotal;
+      var totalCost = callsRadioTotal + smsRadioTotal;
       totalTwoElem.innerHTML = totalCost.toFixed(2);
       
       if(totalCost >= 50) {
