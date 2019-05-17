@@ -42,8 +42,8 @@ var totalSettingsText = document.querySelector('.totalSettingsText');
 //Initial costs
 var defaultCallCost = 2.75;
 var defaultSmsCost = 0.75;
-var criticalLevel = 30;
-var warningLevel = 20;
+var criticalLevel = Number(criticalLevelSettingElem.value);
+var warningLevel = Number(warningLevelSettingElem.value);;
 
 function settingsAddBtnClicked() {
    for(var i = 0; i < billItemTypeWithSettingsElem.length; i++) {
