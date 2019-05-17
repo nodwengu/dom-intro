@@ -39,6 +39,7 @@ var totalSettingsText = document.querySelector('.totalSettingsText');
 // * display the latest total on the screen.
 // * check the value thresholds and display the total value in the right color.
 
+//Initial costs
 var defaultCallCost = 2.75;
 var defaultSmsCost = 0.75;
 var criticalLevel = 30;
@@ -47,18 +48,6 @@ var warningLevel = 20;
 function settingsAddBtnClicked() {
    for(var i = 0; i < billItemTypeWithSettingsElem.length; i++) {
       var elem = billItemTypeWithSettingsElem[i];
-
-      // if(elem.checked) {
-      //    if(elem.value == 'call') {
-      //       callTotalSettings += Number(callCostSettingElem.value);
-      //       callTotalSettingsElem.innerHTML = callTotalSettings.toFixed(2);
-      //    } if(elem.value == 'sms') {
-      //       smsTotalSettings += Number(smsCostSettingElem.value);
-      //       smsTotalSettingsElem.innerHTML = smsTotalSettings.toFixed(2);
-      //    }
-      //    totalSettings = callTotalSettings + smsTotalSettings;
-      //    totalSettingsElem.innerHTML = totalSettings.toFixed(2);
-      // }
 
       if(elem.checked) {
          if(elem.value == 'call') {
@@ -74,22 +63,22 @@ function settingsAddBtnClicked() {
    }
 
    if( totalSettings >= criticalLevel ) {
+      totalSettingsText.classList.remove('warning');
       totalSettingsText.classList.add('danger');
-   } else if( totalSettings >= warningLevel ) {
+   } else if( totalSettings >= warningLevel && totalSettings < criticalLevel) {
+      totalSettingsText.classList.remove('danger');
       totalSettingsText.classList.add('warning');
+   } else {
+      totalSettingsText.classList.remove('danger');
+      totalSettingsText.classList.remove('warning');
    }
-
-   // if( totalSettings >= Number(criticalLevelSettingElem.value) ) {
-   //    totalSettingsText.classList.add('danger');
-   // } else if( totalSettings >= Number(warningLevelSettingElem.value) ) {
-   //    totalSettingsText.classList.add('warning');
-   // }
-    
 }
 
 function updateSettingsBtnClicked() {
    defaultCallCost = Number(callCostSettingElem.value);
    defaultSmsCost = Number(smsCostSettingElem.value);
+   criticalLevel = Number(criticalLevelSettingElem.value);
+   warningLevel = Number(warningLevelSettingElem.value);
 }
 
 settingsAddBtnElem.addEventListener('click', settingsAddBtnClicked);
