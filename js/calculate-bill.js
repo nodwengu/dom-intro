@@ -1,7 +1,6 @@
 //get a reference to the calculate button
 var calculateBtnElement = document.querySelector('.calculateBtn');
 
-
 //get a reference to the billTotal element
 var billTotalElement = document.querySelector('.billTotal');
 var totalElement = document.querySelector('.total');

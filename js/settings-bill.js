@@ -40,8 +40,8 @@ var totalSettingsText = document.querySelector('.totalSettingsText');
 // * check the value thresholds and display the total value in the right color.
 
 //Initial costs
-var defaultCallCost = 2.75;
-var defaultSmsCost = 0.75;
+var defaultCallCost = 0.00;
+var defaultSmsCost = 0.00;
 var criticalLevel = Number(criticalLevelSettingElem.value);
 var warningLevel = Number(warningLevelSettingElem.value);;
 
@@ -59,7 +59,11 @@ function settingsAddBtnClicked() {
          }
          totalSettings = callTotalSettings + smsTotalSettings;
          totalSettingsElem.innerHTML = totalSettings.toFixed(2);
-      }
+      } 
+   }
+
+   if(totalSettings >= criticalLevel) {
+      settingsAddBtnElem.disabled = true;
    }
 
    if( totalSettings >= criticalLevel ) {
