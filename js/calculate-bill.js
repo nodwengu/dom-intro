@@ -14,13 +14,15 @@ var billStringElement = document.querySelector(".billString");
 //  * check if it is a call or an sms and add the right amount to the overall total
 //  * once done looping over all the entries - display the total onto the screen in the billTotal element
 
-function totalPhoneBill(callsAndSms){
-   var callsAndSmsArr = callsAndSms.split(",");
+var input = billStringElement.value
+function totalPhoneBill(input){
+   alert(input);
+   var inputArr = input.split(",");
    var callsCounter = 0;
    var smsCounter = 0;
 
-   for(var i = 0; i < callsAndSmsArr.length; i++) {
-      var element = callsAndSmsArr[i].trim();
+   for(var i = 0; i < inputArr.length; i++) {
+      var element = inputArr[i].trim();
       element = element.toLowerCase();
 
       if(element == "sms") {

@@ -1,0 +1,11 @@
+create a folder greetings
+create a file called index.html
+Create your CSS and JavaScript in files called greet.js and greet.css.
+In your html document's head element add a link element.
+In your html document's body element add a script element to connect my js file.
+Keep track of how many people have been greeted
+Show the counter on the screen
+Keep the counter on the screen up to date
+Work on the  radio buttons to show different languages based on the clicked button
+Work on persisting the counter
+Background Using localStorage
