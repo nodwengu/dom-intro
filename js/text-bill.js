@@ -17,8 +17,8 @@ var totalTextElem = document.querySelector('.red');
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
 
-var callsTotal = 0;
-var smsTotal = 0;
+// var callsTotal = 0;
+// var smsTotal = 0;
 
 function textBillTotal(){
    // get the value entered in the billType textfield
@@ -50,4 +50,59 @@ function textBillTotal(){
    }
 }
 
-addToBillBtnElem.addEventListener('click', textBillTotal);
+var  CreateTextBillTotal = function() {
+   var callsTotal = 0;
+   var smsTotal = 0;
+   // get the value entered in the billType textfield
+   var billTypeEntered = billTypeText.value.trim();
+   billTypeEntered = billTypeEntered.toLowerCase();
+
+
+   function getCallTotal() {
+       // update the correct total
+      if (billTypeEntered == "call"){
+         callsTotal += 2.75
+      } else if (billTypeEntered == ""){
+         alert("Input value required");
+      } else {
+         alert("Invalid input");
+      }
+
+      return callsTotal;
+   }
+
+   function getSmsTotal() {
+      // update the correct total
+     if (billTypeEntered == "sms"){
+        smsTotal += 0.75;
+     } else if (billTypeEntered == ""){
+        alert("Input value required");
+     } else {
+        alert("Invalid input");
+     }
+
+     return smsTotal;
+  }
+
+  function getTotal() {
+     var sms = getSmsTotal()
+     var call = getCallTotal();
+   
+     return sms + call;
+}
+
+   return {
+      getCallTotal,
+      getSmsTotal,
+      getTotal
+
+   }
+
+
+}
+
+
+addToBillBtnElem.addEventListener('click', function() {
+   alert(textBillTotal());
+   CreateTextBillTotal.getTotal();
+});
