@@ -20,21 +20,31 @@ var totalSettingsElem = document.querySelector('.totalSettings');
 var totalSettingsText = document.querySelector('.totalSettingsText');
 
 function changeTotalColor() {
-   if( billWithSettings1.getCritical() ) {
-      totalSettingsText.classList.remove('warning');
-      totalSettingsText.classList.add('danger');
-   } else if( billWithSettings1.getWarning() ) {
-      totalSettingsText.classList.remove('danger');
-      totalSettingsText.classList.add('warning');
-   } else {
-      totalSettingsText.classList.remove('danger');
-      totalSettingsText.classList.remove('warning');
+   var warningLevel = document.querySelector('.warningLevelSetting').value;
+   var criticalLevel = document.querySelector('.warningLevelSetting').value;
+   var callVal = document.querySelector('.callCostSetting').value
+   var smsVal = document.querySelector('.smsCostSetting').value;
+
+   if(callVal !=="" && smsVal !=="" && criticalLevel !=="" && warningLevel !==""){
+      if( billWithSettings1.getCritical() ) {
+         totalSettingsText.classList.remove('warning');
+         totalSettingsText.classList.add('danger');
+      } else if( billWithSettings1.getWarning() ) {
+         totalSettingsText.classList.remove('danger');
+         totalSettingsText.classList.add('warning');
+      } else {
+         totalSettingsText.classList.remove('danger');
+         totalSettingsText.classList.remove('warning');
+      }
    }
 }
 
 var billWithSettings1 = billWithSettings();
 
 function settingsAddBtnClicked() {
+  
+   billWithSettings1.setTotal();
+
    var callVal = Number(document.querySelector('.callCostSetting').value);
    var smsVal = Number(document.querySelector('.smsCostSetting').value); 
 
@@ -72,7 +82,7 @@ function settingsAddBtnClicked() {
       settingsAddBtnElem.disabled = true;
    }
    
-   changeTotalColor()
+   changeTotalColor();
 }
 
 function updateSettingsBtnClicked() {
