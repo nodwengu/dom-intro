@@ -22,54 +22,35 @@ var callTotalSettingsElem = document.querySelector('.callTotalSettings');
 var smsTotalSettingsElem = document.querySelector('.smsTotalSettings');
 var totalSettingsElem = document.querySelector('.totalSettings');
 
-var callTotalSettings = 0;
-var smsTotalSettings = 0;
-var totalSettings = 0; 
-
 var totalSettingsText = document.querySelector('.totalSettingsText');
 
-//add an event listener for when the 'Update settings' button is pressed
-
-//add an event listener for when the add button is pressed
-
-//in the event listener get the value from the billItemTypeRadio radio buttons
-// * add the appropriate value to the call / sms total
-// * add the appropriate value to the overall total
-// * add nothing for invalid values that is not 'call' or 'sms'.
-// * display the latest total on the screen.
-// * check the value thresholds and display the total value in the right color.
-
-//Initial costs
-var defaultCallCost = 0.00;
-var defaultSmsCost = 0.00;
-var criticalLevel = Number(criticalLevelSettingElem.value);
-var warningLevel = Number(warningLevelSettingElem.value);;
+var billWithSettings1 = billWithSettings();
 
 function settingsAddBtnClicked() {
+   var callVal = Number(document.querySelector('.callCostSetting').value);
+   var smsVal = Number(document.querySelector('.smsCostSetting').value); 
+
+   var criticalLevel = Number(criticalLevelSettingElem.value);
+   var warningLevel = Number(warningLevelSettingElem.value);
+
    for(var i = 0; i < billItemTypeWithSettingsElem.length; i++) {
       var elem = billItemTypeWithSettingsElem[i];
 
       if(elem.checked) {
-         if(elem.value == 'call') {
-            callTotalSettings += defaultCallCost;
-            callTotalSettingsElem.innerHTML = callTotalSettings.toFixed(2);
-         } if(elem.value == 'sms') {
-            smsTotalSettings += defaultSmsCost;
-            smsTotalSettingsElem.innerHTML = smsTotalSettings.toFixed(2);
-         }
-         totalSettings = callTotalSettings + smsTotalSettings;
-         totalSettingsElem.innerHTML = totalSettings.toFixed(2);
-      } 
+         callTotalSettingsElem.innerHTML = billWithSettings1.getCallTotal(elem.value, callVal);
+         smsTotalSettingsElem.innerHTML = billWithSettings1.getSmsTotal(elem.value, smsVal);
+         totalSettingsElem.innerHTML = billWithSettings1.getTotal();
+      }
    }
 
-   if(totalSettings >= criticalLevel) {
+   if(billWithSettings1.getTotal() >= criticalLevel) {
       settingsAddBtnElem.disabled = true;
    }
-
-   if( totalSettings >= criticalLevel ) {
+   
+   if( billWithSettings1.getTotal() >= criticalLevel ) {
       totalSettingsText.classList.remove('warning');
       totalSettingsText.classList.add('danger');
-   } else if( totalSettings >= warningLevel && totalSettings < criticalLevel) {
+   } else if( billWithSettings1.getTotal() >= warningLevel && billWithSettings1.getTotal() < criticalLevel) {
       totalSettingsText.classList.remove('danger');
       totalSettingsText.classList.add('warning');
    } else {
@@ -78,13 +59,4 @@ function settingsAddBtnClicked() {
    }
 }
 
-function updateSettingsBtnClicked() {
-   defaultCallCost = Number(callCostSettingElem.value);
-   defaultSmsCost = Number(smsCostSettingElem.value);
-   criticalLevel = Number(criticalLevelSettingElem.value);
-   warningLevel = Number(warningLevelSettingElem.value);
-}
-
 settingsAddBtnElem.addEventListener('click', settingsAddBtnClicked);
-
-updateSettingsElem.addEventListener('click', updateSettingsBtnClicked);
