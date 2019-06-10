@@ -6,6 +6,7 @@ describe("Settings Bill Function", function() {
         billWithSettings1.setCallTotal('call', 3.00);
 
         assert.equal(billWithSettings1.getCallTotal(), 5.00);
+        billWithSettings1.setTotal();
         assert.equal(billWithSettings1.getTotal(), 5.00);
 
         billWithSettings1.setCallTotal('call', 1.00);
@@ -13,6 +14,7 @@ describe("Settings Bill Function", function() {
         billWithSettings1.setCallTotal('call', 2.00);
         billWithSettings1.setCallTotal('call', 2.00);
         assert.equal(billWithSettings1.getCallTotal(), 10.00);
+        billWithSettings1.setTotal();
         assert.equal(billWithSettings1.getTotal(), 10.00);
     });
 
@@ -23,6 +25,7 @@ describe("Settings Bill Function", function() {
         billWithSettings1.setSmsTotal('sms', 1.00);
 
         assert.equal(billWithSettings1.getSmsTotal(), 2.00);
+        billWithSettings1.setTotal();
         assert.equal(billWithSettings1.getTotal(), 2.00);
 
         billWithSettings1.setSmsTotal('sms', 1.00);
@@ -31,6 +34,7 @@ describe("Settings Bill Function", function() {
         billWithSettings1.setSmsTotal('sms', 1.00);
 
         assert.equal(billWithSettings1.getSmsTotal(), 6.00);
+        billWithSettings1.setTotal();
         assert.equal(billWithSettings1.getTotal(), 6.00);
     });
 
@@ -42,6 +46,7 @@ describe("Settings Bill Function", function() {
 
         assert.equal(billWithSettings1.getCallTotal(), 0.00);
         assert.equal(billWithSettings1.getSmsTotal(), 0.00);
+        billWithSettings1.setTotal();
         assert.equal(billWithSettings1.getTotal(), 0.00);
     });
 
@@ -53,6 +58,7 @@ describe("Settings Bill Function", function() {
 
         assert.equal(billWithSettings1.getCallTotal(), 0.00);
         assert.equal(billWithSettings1.getSmsTotal(), 0.00);
+        billWithSettings1.setTotal();
         assert.equal(billWithSettings1.getTotal(), 0.00);
     });
 
@@ -64,6 +70,7 @@ describe("Settings Bill Function", function() {
 
         assert.equal(billWithSettings1.getCallTotal(), 0.00);
         assert.equal(billWithSettings1.getSmsTotal(), 0.00);
+        billWithSettings1.setTotal();
         assert.equal(billWithSettings1.getTotal(), 0.00)
     });
 

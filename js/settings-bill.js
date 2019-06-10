@@ -20,10 +20,10 @@ var totalSettingsElem = document.querySelector('.totalSettings');
 var totalSettingsText = document.querySelector('.totalSettingsText');
 
 function changeTotalColor() {
-   if( billWithSettings1.getTotal() >= criticalLevel ) {
+   if( billWithSettings1.getCritical() ) {
       totalSettingsText.classList.remove('warning');
       totalSettingsText.classList.add('danger');
-   } else if( billWithSettings1.getTotal() >= warningLevel && billWithSettings1.getTotal() < criticalLevel) {
+   } else if( billWithSettings1.getWarning() ) {
       totalSettingsText.classList.remove('danger');
       totalSettingsText.classList.add('warning');
    } else {
@@ -50,25 +50,15 @@ function settingsAddBtnClicked() {
 
          callTotalSettingsElem.innerHTML = billWithSettings1.getCallTotal();
          smsTotalSettingsElem.innerHTML = billWithSettings1.getSmsTotal();
+         billWithSettings1.setTotal();
          totalSettingsElem.innerHTML = billWithSettings1.getTotal();
       }
    }
 
    if(billWithSettings1.getTotal() >= criticalLevel) {
       settingsAddBtnElem.disabled = true;
-      //changeTotalColor()
-
-      if( billWithSettings1.getTotal() >= criticalLevel ) {
-         totalSettingsText.classList.remove('warning');
-         totalSettingsText.classList.add('danger');
-      } else if( billWithSettings1.getTotal() >= warningLevel && billWithSettings1.getTotal() < criticalLevel) {
-         totalSettingsText.classList.remove('danger');
-         totalSettingsText.classList.add('warning');
-      } else {
-         totalSettingsText.classList.remove('danger');
-         totalSettingsText.classList.remove('warning');
-      }
    }
+   changeTotalColor()
 
    document.querySelector('.warningLevelSetting').addEventListener('change', function(){
       settingsAddBtnElem.disabled = false;
@@ -77,40 +67,21 @@ function settingsAddBtnClicked() {
    document.querySelector('.criticalLevelSetting').addEventListener('change', function(){
       settingsAddBtnElem.disabled = false;
    })
-   //changeTotalColor()
 
-   if( billWithSettings1.getTotal() >= criticalLevel ) {
-      totalSettingsText.classList.remove('warning');
-      totalSettingsText.classList.add('danger');
-   } else if( billWithSettings1.getTotal() >= warningLevel && billWithSettings1.getTotal() < criticalLevel) {
-      totalSettingsText.classList.remove('danger');
-      totalSettingsText.classList.add('warning');
-   } else {
-      totalSettingsText.classList.remove('danger');
-      totalSettingsText.classList.remove('warning');
+   if(billWithSettings1.getTotal() >= criticalLevel) {
+      settingsAddBtnElem.disabled = true;
    }
+   
+   changeTotalColor()
 }
 
-// function settingsAddBtnClicked() {
-//    // get refences to all the settings fields
-//    var callCostSettingElem = document.querySelector('.callCostSetting');
-//    var smsCostSettingElem = document.querySelector('.smsCostSetting');
-//    var warningLevelSettingElem = document.querySelector('.warningLevelSetting');
-//    var criticalLevelSettingElem = document.querySelector('.criticalLevelSetting');
+function updateSettingsBtnClicked() {
+   var criticalLevel = Number(criticalLevelSettingElem.value);
+   var warningLevel = Number(warningLevelSettingElem.value);
 
-//    var callVal = Number(callCostSettingElem.value);
-//    var smsCostVal = Number(smsCostSettingElem.value);
-//    var warningVal = Number(warningLevelSettingElem.value);
-//    var criticaVal = Number(criticalLevelSettingElem.value);
-
-//    billWithSettings1.updateSettings(callVal, smsCostVal, warningVal, criticaVal);
-// }
-
-
+   billWithSettings1.updateSettings(warningLevel, criticalLevel);
+}
 
 settingsAddBtnElem.addEventListener('click', settingsAddBtnClicked);
 
-
-
-
-settingsAddBtnElem.addEventListener('click', settingsAddBtnClicked);
+updateSettingsElem.addEventListener('click', updateSettingsBtnClicked);

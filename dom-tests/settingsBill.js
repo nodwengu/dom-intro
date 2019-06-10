@@ -2,6 +2,7 @@
 function billWithSettings() {
    var callsTotal = 0;
    var smsTotal = 0;
+   var total = 0;
 
    var warningLevel = 0;
    var criticalLevel = 0;
@@ -18,6 +19,10 @@ function billWithSettings() {
       } 
    }
 
+   function setTotal() {
+      total = callsTotal + smsTotal;
+   }
+
    function getCallTotal() {
       return callsTotal.toFixed(2);
    }
@@ -27,29 +32,21 @@ function billWithSettings() {
   }
 
    function getTotal() {
-      return (callsTotal + smsTotal).toFixed(2);
+      return total.toFixed(2);
    }
 
-   function updateSettings(callVal, smsVal, warning, critical) {
-      callsTotal = callVal;
-      smsTotal = smsVal;
+   function updateSettings(warning, critical) {
       warningLevel = warning;
       criticalLevel = critical;
-      alert(critical);
    }
 
-   // function setWarningACriticalLevels() {
-   //    if( total >= criticalLevel ) {
-   //       totalSettingsText.classList.remove('warning');
-   //       totalSettingsText.classList.add('danger');
-   //    } else if( billWithSettings1.getTotal() >= warningLevel && billWithSettings1.getTotal() < criticalLevel) {
-   //       totalSettingsText.classList.remove('danger');
-   //       totalSettingsText.classList.add('warning');
-   //    } else {
-   //       totalSettingsText.classList.remove('danger');
-   //       totalSettingsText.classList.remove('warning');
-   // }
+   function getCritical() {
+      return (total >= criticalLevel);
+   }
 
+   function getWarning() {
+      return (total >= warningLevel && total < criticalLevel);
+   }
 
    return {
       getCallTotal,
@@ -57,7 +54,10 @@ function billWithSettings() {
       getTotal,
       updateSettings,
       setCallTotal,
-      setSmsTotal
+      setSmsTotal,
+      setTotal,
+      getCritical,
+      getWarning
 
       // setWarningACriticalLevels
    }
