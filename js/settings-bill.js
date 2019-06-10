@@ -25,7 +25,10 @@ function changeTotalColor() {
    var callVal = document.querySelector('.callCostSetting').value
    var smsVal = document.querySelector('.smsCostSetting').value;
 
-   if(callVal !=="" && smsVal !=="" && criticalLevel !=="" && warningLevel !==""){
+      if(callVal ==="" && smsVal ==="" && criticalLevel ==="" && warningLevel ===""){
+         return false;
+      }
+      
       if( billWithSettings1.getCritical() ) {
          totalSettingsText.classList.remove('warning');
          totalSettingsText.classList.add('danger');
@@ -36,7 +39,7 @@ function changeTotalColor() {
          totalSettingsText.classList.remove('danger');
          totalSettingsText.classList.remove('warning');
       }
-   }
+   
 }
 
 var billWithSettings1 = billWithSettings();
@@ -85,7 +88,11 @@ function settingsAddBtnClicked() {
    changeTotalColor();
 }
 
+settingsAddBtnElem.disabled = true;
+
 function updateSettingsBtnClicked() {
+   settingsAddBtnElem.disabled = false;
+
    var criticalLevel = Number(criticalLevelSettingElem.value);
    var warningLevel = Number(warningLevelSettingElem.value);
 
