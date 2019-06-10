@@ -1,13 +1,8 @@
 // get a reference to the sms or call radio buttons
 var billItemTypeWithSettingsElem = document.querySelectorAll('.billItemTypeWithSettings');
 
-
-// get refences to all the settings fields
-var callCostSettingElem = document.querySelector('.callCostSetting');
-var smsCostSettingElem = document.querySelector('.smsCostSetting');
 var warningLevelSettingElem = document.querySelector('.warningLevelSetting');
 var criticalLevelSettingElem = document.querySelector('.criticalLevelSetting');
-
 
 //get a reference to the add button
 var settingsAddBtnElem = document.querySelector('.settingsAddBtn');
@@ -50,8 +45,11 @@ function settingsAddBtnClicked() {
       var elem = billItemTypeWithSettingsElem[i];
 
       if(elem.checked) {
-         callTotalSettingsElem.innerHTML = billWithSettings1.getCallTotal(elem.value, callVal);
-         smsTotalSettingsElem.innerHTML = billWithSettings1.getSmsTotal(elem.value, smsVal);
+         billWithSettings1.setCallTotal(elem.value, callVal);
+         billWithSettings1.setSmsTotal(elem.value, smsVal);
+
+         callTotalSettingsElem.innerHTML = billWithSettings1.getCallTotal();
+         smsTotalSettingsElem.innerHTML = billWithSettings1.getSmsTotal();
          totalSettingsElem.innerHTML = billWithSettings1.getTotal();
       }
    }
@@ -75,6 +73,10 @@ function settingsAddBtnClicked() {
    document.querySelector('.warningLevelSetting').addEventListener('change', function(){
       settingsAddBtnElem.disabled = false;
    })
+
+   document.querySelector('.criticalLevelSetting').addEventListener('change', function(){
+      settingsAddBtnElem.disabled = false;
+   })
    //changeTotalColor()
 
    if( billWithSettings1.getTotal() >= criticalLevel ) {
@@ -88,6 +90,26 @@ function settingsAddBtnClicked() {
       totalSettingsText.classList.remove('warning');
    }
 }
+
+// function settingsAddBtnClicked() {
+//    // get refences to all the settings fields
+//    var callCostSettingElem = document.querySelector('.callCostSetting');
+//    var smsCostSettingElem = document.querySelector('.smsCostSetting');
+//    var warningLevelSettingElem = document.querySelector('.warningLevelSetting');
+//    var criticalLevelSettingElem = document.querySelector('.criticalLevelSetting');
+
+//    var callVal = Number(callCostSettingElem.value);
+//    var smsCostVal = Number(smsCostSettingElem.value);
+//    var warningVal = Number(warningLevelSettingElem.value);
+//    var criticaVal = Number(criticalLevelSettingElem.value);
+
+//    billWithSettings1.updateSettings(callVal, smsCostVal, warningVal, criticaVal);
+// }
+
+
+
+settingsAddBtnElem.addEventListener('click', settingsAddBtnClicked);
+
 
 
 
