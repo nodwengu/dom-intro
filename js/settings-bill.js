@@ -25,20 +25,20 @@ function changeTotalColor() {
    var callVal = document.querySelector('.callCostSetting').value
    var smsVal = document.querySelector('.smsCostSetting').value;
 
-      if(callVal ==="" && smsVal ==="" && criticalLevel ==="" && warningLevel ===""){
-         return false;
-      }
-      
-      if( billWithSettings1.getCritical() ) {
-         totalSettingsText.classList.remove('warning');
-         totalSettingsText.classList.add('danger');
-      } else if( billWithSettings1.getWarning() ) {
-         totalSettingsText.classList.remove('danger');
-         totalSettingsText.classList.add('warning');
-      } else {
-         totalSettingsText.classList.remove('danger');
-         totalSettingsText.classList.remove('warning');
-      }
+   if(callVal ==="" && smsVal ==="" && criticalLevel ==="" && warningLevel ===""){
+      return false;
+   }
+   
+   if( billWithSettings1.getCritical() ) {
+      totalSettingsText.classList.remove('warning');
+      totalSettingsText.classList.add('danger');
+   } else if( billWithSettings1.getWarning() ) {
+      totalSettingsText.classList.remove('danger');
+      totalSettingsText.classList.add('warning');
+   } else {
+      totalSettingsText.classList.remove('danger');
+      totalSettingsText.classList.remove('warning');
+   }
    
 }
 
