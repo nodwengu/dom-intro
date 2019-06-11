@@ -58,15 +58,6 @@ function billWithSettings() {
       setTotal,
       getCritical,
       getWarning
-
-      // setWarningACriticalLevels
    }
 
 }
-
-
-// var billWithSettings1 = billWithSettings(2, 1);
-
-// alert(billWithSettings1.getSmsTotal('sms'));
-// alert(billWithSettings1.getCallTotal('call'));
-// alert(billWithSettings1.getTotal());
