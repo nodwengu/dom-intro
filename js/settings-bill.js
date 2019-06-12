@@ -63,7 +63,7 @@ function settingsAddBtnClicked() {
             billWithSettings1.setCallTotal(callVal);
             callTotalSettingsElem.innerHTML = billWithSettings1.getCallTotal();
 
-         } else if (type == "sms"){
+         } else if (elem.value == "sms"){
             billWithSettings1.setSmsTotal(smsVal);
             smsTotalSettingsElem.innerHTML = billWithSettings1.getSmsTotal();
          } 
