@@ -56,8 +56,6 @@ function billWithSettings() {
       setTotal,
       getCritical,
       getWarning
-
-      // setWarningACriticalLevels
    }
 
 }
