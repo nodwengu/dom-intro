@@ -21,13 +21,17 @@ addToBillBtnElem.addEventListener('click', function() {
 
    TextBillTotal1.checkInput(billTypeVal);
 
-   var smsCosts =  TextBillTotal1.getSmsTotal(billTypeVal);
-   var callCosts =  TextBillTotal1.getCallTotal(billTypeVal);
-   var totalCosts =  TextBillTotal1.getTotal();
+   if (billTypeVal == "call"){
+      TextBillTotal1.setSmsTotal();
+      callsTotalElem.innerHTML = TextBillTotal1.getSmsTotal()
 
-   //update the totals that is displayed on the screen.
-   callsTotalElem.innerHTML = callCosts;
-   smsTotalElem.innerHTML = smsCosts;
+   } else if(billTypeVal == "sms"){
+      TextBillTotal1.setSmsTotal();
+      smsTotalElem.innerHTML = TextBillTotal1.getSmsTotal();
+   }
+
+   TextBillTotal1.setTotal();
+   var totalCosts =  TextBillTotal1.getTotal();
    totalCostElem.innerHTML = totalCosts;
 
    //color the total based on the criteria

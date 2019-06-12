@@ -11,6 +11,6 @@ describe("Calculate Bill Function", function() {
 
     it("Should false when an invalid data is provided", function() {
         var data = "23232"
-        assert.equal(totalPhoneBill(data), "Invalid input data") 
+        assert.equal(totalPhoneBill(data), 0.00) 
     })
 });
