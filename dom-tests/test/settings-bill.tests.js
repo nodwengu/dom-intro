@@ -3,7 +3,8 @@ describe("Settings Bill Function", function() {
         var billWithSettings1 = billWithSettings();
 
         billWithSettings1.setCallTotal(2.00);
-        billWithSettings1.setCallTotal(3.00);
+        //billWithSettings1.setCallTotal(3.00);
+        billWithSettings1.getCallTotal()
 
         assert.equal(billWithSettings1.getCallTotal(), 5.00);
         billWithSettings1.setTotal();
@@ -49,18 +50,6 @@ describe("Settings Bill Function", function() {
         billWithSettings1.setTotal();
         assert.equal(billWithSettings1.getTotal(), 40.00);
     });
-
-    // it('should return "0.00" when no radio button is selected but input value is provided', function(){
-    //     var billWithSettings1 = billWithSettings();
-
-    //     billWithSettings1.getCallTotal(20.00);
-    //     billWithSettings1.getSmsTotal(20.00);
-
-    //     assert.equal(billWithSettings1.getCallTotal(), 0.00);
-    //     assert.equal(billWithSettings1.getSmsTotal(), 0.00);
-    //     billWithSettings1.setTotal();
-    //     assert.equal(billWithSettings1.getTotal(), 0.00);
-    // });
 
     it('should return false when no input value is provided', function(){
         var billWithSettings1 = billWithSettings();
