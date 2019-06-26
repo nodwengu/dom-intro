@@ -7,16 +7,14 @@ function billWithSettings() {
    var warningLevel = 0;
    var criticalLevel = 0;
 
-   function setCallTotal(type, callVal) {
-      if (type == "call"){
-         callsTotal += callVal
-      } 
+   function setCallTotal(callVal) {
+     
+      callsTotal += callVal
    }
 
-   function setSmsTotal(type, smsVal) {
-      if (type == "sms"){
-         smsTotal += smsVal
-      } 
+   function setSmsTotal(smsVal) {
+     
+      smsTotal += smsVal
    }
 
    function setTotal() {

@@ -12,10 +12,8 @@ function totalPhoneBill(input){
          smsCounter++;	
       } else if(element == "call") {
          callsCounter++;
-      } else if(element == "") {
+      } else  {
          return (0.00).toFixed(2);
-      }else {
-         return "Invalid input data";
       }
    }
    return (callsCounter * 2.75 + smsCounter * 0.75).toFixed(2);

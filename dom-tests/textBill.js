@@ -3,29 +3,30 @@ var TextBillTotal = function() {
    var callsTotal = 0;
    var smsTotal = 0;
    var total = 0;
-   
-   function getCallTotal(costType) {
-       // update the correct total
-      if (costType == "call"){
-         callsTotal += 2.75
-      } 
 
-      return callsTotal.toFixed(2);;
-      // alert(callsTotal);
+   function setCallTotal() {
+      // update the correct total
+      callsTotal += 2.75
    }
 
-   function getSmsTotal(costType) {
+   function setSmsTotal() {
       // update the correct total
-     if (costType == "sms"){
-        smsTotal += 0.75;
-     } 
+      smsTotal += 0.75;
+   }
 
-     return smsTotal.toFixed(2);;
-  }
+   function setTotal() {
+      total = callsTotal + smsTotal;
+   }
+   
+   function getCallTotal() {
+      return callsTotal.toFixed(2);;
+   }
 
-  function getTotal() {
-    total = callsTotal + smsTotal;
+   function getSmsTotal() {
+      return smsTotal.toFixed(2);;
+   }
 
+   function getTotal() {
      return total.toFixed(2);
 }
 
@@ -45,6 +46,11 @@ function testFun() {
       getCallTotal,
       getSmsTotal,
       getTotal,
-      checkInput
+      checkInput,
+      setCallTotal,
+      setSmsTotal,
+      setTotal
+
+
    }
 }

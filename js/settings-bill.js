@@ -53,16 +53,21 @@ function settingsAddBtnClicked() {
 
    var criticalLevel = Number(criticalLevelSettingElem.value);
    var warningLevel = Number(warningLevelSettingElem.value);
+   
 
    for(var i = 0; i < billItemTypeWithSettingsElem.length; i++) {
       var elem = billItemTypeWithSettingsElem[i];
 
       if(elem.checked) {
-         billWithSettings1.setCallTotal(elem.value, callVal);
-         billWithSettings1.setSmsTotal(elem.value, smsVal);
+         if (elem.value == "call"){
+            billWithSettings1.setCallTotal(callVal);
+            callTotalSettingsElem.innerHTML = billWithSettings1.getCallTotal();
 
-         callTotalSettingsElem.innerHTML = billWithSettings1.getCallTotal();
-         smsTotalSettingsElem.innerHTML = billWithSettings1.getSmsTotal();
+         } else if (elem.value == "sms"){
+            billWithSettings1.setSmsTotal(smsVal);
+            smsTotalSettingsElem.innerHTML = billWithSettings1.getSmsTotal();
+         } 
+         
          billWithSettings1.setTotal();
          totalSettingsElem.innerHTML = billWithSettings1.getTotal();
       }
