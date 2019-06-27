@@ -1,66 +1,85 @@
 describe("Settings Bill Function", function() {
+    it('should return totals when one of radio button is checked and input values are provided', function(){
+        var billWithSettings1 = billWithSettings();
+
+        billWithSettings1.setWarningLevel(10)
+        billWithSettings1.setCriticalLevel(20)
+
+        billWithSettings1.setCallCost(2.00);
+        billWithSettings1.setSmsCost(1.00);
+
+        billWithSettings1.makeCall();
+        billWithSettings1.sendSms();
+
+        assert.equal(billWithSettings1.getCallTotal(), 2.00);
+        assert.equal(billWithSettings1.getSmsTotal(), 1.00);
+        assert.equal(billWithSettings1.getTotal(), 3.00);
+       
+        assert.equal(billWithSettings1.getCritical(), 20);
+        assert.equal(billWithSettings1.getWarning(), 10);
+    });
+
     it('should return total call cost when "call" radio button is checked and call input value is provided', function(){
         var billWithSettings1 = billWithSettings();
 
-        billWithSettings1.setCallTotal(2.00);
-        //billWithSettings1.setCallTotal(3.00);
-        billWithSettings1.getCallTotal()
+        billWithSettings1.setWarningLevel(10)
+        billWithSettings1.setCriticalLevel(20)
 
-        assert.equal(billWithSettings1.getCallTotal(), 5.00);
-        billWithSettings1.setTotal();
-        assert.equal(billWithSettings1.getTotal(), 5.00);
+        billWithSettings1.setCallCost(2.00);
+        billWithSettings1.makeCall();
 
-        billWithSettings1.setCallTotal(1.00);
-        billWithSettings1.setCallTotal(0.00);
-        billWithSettings1.setCallTotal(2.00);
-        billWithSettings1.setCallTotal(2.00);
+        assert.equal(billWithSettings1.getCallTotal(), 2.00);
+        
+        billWithSettings1.makeCall();
+        assert.equal(billWithSettings1.getTotal(), 4.00);
+
+        billWithSettings1.makeCall();
+        billWithSettings1.makeCall();
+        billWithSettings1.makeCall();
+       
         assert.equal(billWithSettings1.getCallTotal(), 10.00);
-        billWithSettings1.setTotal();
         assert.equal(billWithSettings1.getTotal(), 10.00);
+
+        assert.equal(billWithSettings1.getCritical(), 20);
+        assert.equal(billWithSettings1.getWarning(), 10);
     });
 
     it('should return total sms cost when "sms" radio button is checked and sms input value is provided', function(){
         var billWithSettings1 = billWithSettings();
 
-        billWithSettings1.setSmsTotal(1.00);
-        billWithSettings1.setSmsTotal(1.00);
+        billWithSettings1.setSmsCost(1.00);
+        billWithSettings1.sendSms();
 
-        assert.equal(billWithSettings1.getSmsTotal(), 2.00);
-        billWithSettings1.setTotal();
-        assert.equal(billWithSettings1.getTotal(), 2.00);
+        assert.equal(billWithSettings1.getSmsTotal(), 1.00);
+        assert.equal(billWithSettings1.getTotal(), 1.00);
 
-        billWithSettings1.setSmsTotal(1.00);
-        billWithSettings1.setSmsTotal(1.00);
-        billWithSettings1.setSmsTotal(1.00);
-        billWithSettings1.setSmsTotal(1.00);
-
-        assert.equal(billWithSettings1.getSmsTotal(), 6.00);
-        billWithSettings1.setTotal();
-        assert.equal(billWithSettings1.getTotal(), 6.00);
+        billWithSettings1.sendSms();
+        billWithSettings1.sendSms();
+       
+        assert.equal(billWithSettings1.getSmsTotal(), 3.00);
+        assert.equal(billWithSettings1.getTotal(), 3.00);
     });
 
-    it('should return totals when a valid input value for "calls and sms" is provided', function(){
+    it('should critical and warning levels when input is provided', function(){
         var billWithSettings1 = billWithSettings();
 
-        billWithSettings1.setCallTotal(20.00);
-        billWithSettings1.setSmsTotal(20.00);
+        billWithSettings1.setWarningLevel(10)
+        billWithSettings1.setCriticalLevel(20)
 
-        assert.equal(billWithSettings1.getCallTotal(), 20.00);
-        assert.equal(billWithSettings1.getSmsTotal(), 20.00);
-        billWithSettings1.setTotal();
-        assert.equal(billWithSettings1.getTotal(), 40.00);
+        assert.equal(billWithSettings1.getCritical(), 20);
+        assert.equal(billWithSettings1.getWarning(), 10);
     });
 
-    it('should return false when no input value is provided', function(){
+    it('should return false when input value for sms and call is not provided', function(){
         var billWithSettings1 = billWithSettings();
 
-        billWithSettings1.setCallTotal();
-        billWithSettings1.setSmsTotal();
+        billWithSettings1.setSmsCost();
+        billWithSettings1.setCallCost();
+        billWithSettings1.makeCall();
+        billWithSettings1.sendSms();
 
-        assert.equal(billWithSettings1.getCallTotal(), 'NaN');
         assert.equal(billWithSettings1.getSmsTotal(), 'NaN');
-
-        billWithSettings1.setTotal();
+        assert.equal(billWithSettings1.getCallTotal(), 'NaN');
         assert.equal(billWithSettings1.getTotal(), 'NaN');
     });
 });
